@@ -26,9 +26,16 @@ public class RomanNumeralsController {
 
     @PostMapping("")
     public ModelAndView convertNumber(int numberToConvert) {
-        String result = converter.convert(numberToConvert);
-
-        ModelAndView mv = new ModelAndView("romanNumerals/default");
+        String result;
+		ModelAndView mv;
+		try {
+			result = converter.convert(numberToConvert);
+			mv = new ModelAndView("romanNumerals/default");
+		} catch (Exception e) {
+			result = "message";
+			mv = new ModelAndView("romanNumerals/default");
+			
+		}
         mv.addObject("conversion", result);
         return mv;
     }
